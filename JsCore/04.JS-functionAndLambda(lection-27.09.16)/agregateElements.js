@@ -1,0 +1,18 @@
+/**
+ * Created by MARK-Max on 28.9.2016 г..
+ */
+function aggEll (input){
+    let elements = input.map(Number);
+    aggregate(elements,0,(a,b)=>a+b);
+    aggregate(elements,0,(a,b)=>a+1/b);
+    aggregate(elements,'',(a,b)=>a+b);
+    function aggregate(arr,initVal,func){
+        "use strict";
+        let val = initVal;
+        for(let i =0 ;i<arr.length;i++){
+            val = func(val,arr[i]);
+        }
+        console.log(val);
+    }
+}
+aggEll ([1,2,3])

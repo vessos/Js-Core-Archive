@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React-Examples</title>
+    <script src="https://unpkg.com/react/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom/dist/react-dom.js"></script>
+    <script src="https://unpkg.com/babel-standalone"></script>
+    <style>
+        .counter {
+            background: greenyellow;
+            padding: 15px;
+            margin: 2px;
+        }
+    </style>
+</head>
+<body>
+<p>Text before</p>
+
+<div id="app"></div>
+
+<p>Text after</p>
+
+
+<script type="text/babel">
+
+    let List = React.createClass({
+        render: function(){
+            let items =[];
+            let count =0
+            for (let item of this.props.items){
+               items.push(<li key={++count}>{item}</li>)
+            }
+            return <ul>
+                {items}
+            </ul>
+        }
+    })
+
+    let Counter = React.createClass({
+        getInitialState: function () {
+            return {count: Number(this.props.start),
+                styles: {color:'red'}
+            };
+        },
+        Increase: function(){
+            this.setState({
+                count:this.state.count+1,
+                styles: {color: 'blue'}
+            })
+        },
+        decrease: function(){
+            this.setState({
+                count:this.state.count-1,
+                styles: {color: 'orange'}
+            })
+        },
+        render: function () {
+            return <div className="counter">Count:
+                     <b style={ this.state.styles}>
+                         {this.state.count}
+                     </b>
+                     <button type="button" onClick={this.Increase}>+</button>
+                     <button type="button" onClick={this.decrease}>-</button>
+                     <button type="button">Color</button>
+                   </div>
+        }
+    });
+    function sayHello(name) {
+        return <div>Hello, {name}</div>;
+    }
+    ReactDOM.render(
+       <List items={['Sofia','Plovdiv','Varna']}/>
+
+       ,
+        document.getElementById('app')
+    )
+</script>
+</body>
+</html>
